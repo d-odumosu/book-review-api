@@ -18,6 +18,7 @@ public class Book {
     private String author;
     private Year publishedYear;
     private String genre;
+    private String synopsis;
 
     public Book(String title, String author, Year publishedYear, String genre){
         this.title = title;
@@ -58,5 +59,11 @@ public class Book {
 
     public void setGenre(String genre) {
         this.genre =genre;
-}
+    }
+    public String getSynopsis(){
+        return synopsis;
+    }
+    public void setSynopsis(String synopsis){
+        this.synopsis =synopsis;
+    }
 }
