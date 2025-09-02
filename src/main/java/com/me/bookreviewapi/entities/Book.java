@@ -1,16 +1,15 @@
-package com.me.bookreviewapi.model;
+package com.me.bookreviewapi.entities;
 
 import java.time.Year;
-
-import org.hibernate.annotations.IdGeneratorType;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
-public class Book {
+@Table(name = "books")
+public class Book{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -19,13 +18,18 @@ public class Book {
     private Year publishedYear;
     private String genre;
     private String synopsis;
+    private String isbn;
 
-    public Book(String title, String author, Year publishedYear, String genre){
+    public Book(String title, String author, Year publishedYear, String genre, String synopsis, String openLibraryId, String isbn){
         this.title = title;
         this.author = author;
         this.publishedYear = publishedYear;
         this.genre = genre;
+        this.synopsis = synopsis;
+        this.isbn = isbn;
     }
+    public Book(){}
+    
     public long getId(){
         return id;
     }
@@ -65,5 +69,13 @@ public class Book {
     }
     public void setSynopsis(String synopsis){
         this.synopsis =synopsis;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
 }

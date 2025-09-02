@@ -1,4 +1,4 @@
-package com.me.bookreviewapi.model;
+package com.me.bookreviewapi.entities;
 
 import java.time.LocalDateTime;
 
@@ -15,9 +15,12 @@ public abstract class Feedback {
     private String content;
     private LocalDateTime createdAt = LocalDateTime.now();
 
-    public Feedback(String content){
+    public Feedback(String content, LocalDateTime createdAt) {
         this.content = content;
+        this.createdAt = createdAt;
     }
+    public Feedback() {}
+    
     public long getId() {
         return id;
     }
