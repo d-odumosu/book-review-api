@@ -11,6 +11,10 @@ public class Comment extends Feedback {
 
     @ManyToOne
     private User user;
+    @ManyToOne
+    private Book book;
+    @ManyToOne
+    private Review review;
 
     public Comment(String content, LocalDateTime createdAt) {
         super(content, createdAt);

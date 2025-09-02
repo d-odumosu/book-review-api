@@ -21,9 +21,13 @@ public class Book{
     private String genre;
     private String synopsis;
     private String isbn;
+    private int rating;
 
     @OneToMany(mappedBy = "book")
     List<Review> reviews;
+
+    @OneToMany(mappedBy = "book")
+    List<Comment> comments;
 
     
     public Book(String title, String author, Year publishedYear, String genre, String synopsis, String openLibraryId, String isbn){
@@ -83,5 +87,13 @@ public class Book{
 
     public void setIsbn(String isbn) {
         this.isbn = isbn;
+    }
+    
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
     }
 }
