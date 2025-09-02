@@ -1,10 +1,12 @@
 package com.me.bookreviewapi.entities;
 
 import java.time.Year;
+import java.util.List;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -20,6 +22,10 @@ public class Book{
     private String synopsis;
     private String isbn;
 
+    @OneToMany(mappedBy = "book")
+    List<Review> reviews;
+
+    
     public Book(String title, String author, Year publishedYear, String genre, String synopsis, String openLibraryId, String isbn){
         this.title = title;
         this.author = author;
@@ -29,7 +35,7 @@ public class Book{
         this.isbn = isbn;
     }
     public Book(){}
-    
+
     public long getId(){
         return id;
     }

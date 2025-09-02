@@ -12,7 +12,6 @@ public class Comment extends Feedback {
     @ManyToOne
     private User user;
 
-
     public Comment(String content, LocalDateTime createdAt) {
         super(content, createdAt);
     }
@@ -20,6 +19,4 @@ public class Comment extends Feedback {
         super(null, null);
         this.user = null;
     }
-
-   
 }
