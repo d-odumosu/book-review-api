@@ -1,6 +1,11 @@
-package com.me.bookreviewapi.entities;
+package com.me.bookreviewapi.comment;
 
 import java.time.LocalDateTime;
+
+import com.me.bookreviewapi.book.Book;
+import com.me.bookreviewapi.interfaceimp.Feedback;
+import com.me.bookreviewapi.review.Review;
+import com.me.bookreviewapi.user.User;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;

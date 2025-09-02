@@ -1,4 +1,4 @@
-package com.me.bookreviewapi.entities;
+package com.me.bookreviewapi.user;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -7,6 +7,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.List;
+
+import com.me.bookreviewapi.comment.Comment;
+import com.me.bookreviewapi.review.Review;
 
 @Entity
 @Table(name = "users")

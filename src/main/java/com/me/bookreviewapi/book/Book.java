@@ -1,7 +1,11 @@
-package com.me.bookreviewapi.entities;
+package com.me.bookreviewapi.book;
 
 import java.time.Year;
 import java.util.List;
+
+import com.me.bookreviewapi.comment.Comment;
+import com.me.bookreviewapi.review.Review;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,7 +25,6 @@ public class Book{
     private String genre;
     private String synopsis;
     private String isbn;
-    private int rating;
 
     @OneToMany(mappedBy = "book")
     List<Review> reviews;
@@ -89,11 +92,4 @@ public class Book{
         this.isbn = isbn;
     }
     
-    public int getRating() {
-        return rating;
-    }
-
-    public void setRating(int rating) {
-        this.rating = rating;
-    }
 }

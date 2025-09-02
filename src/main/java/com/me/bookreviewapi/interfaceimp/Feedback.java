@@ -1,4 +1,4 @@
-package com.me.bookreviewapi.entities;
+package com.me.bookreviewapi.interfaceimp;
 
 import java.time.LocalDateTime;
 

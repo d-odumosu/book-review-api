@@ -1,8 +1,8 @@
-package com.me.bookreviewapi.repository;
+package com.me.bookreviewapi.book;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import com.me.bookreviewapi.entities.Book;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -11,8 +11,6 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     List<Book> findByAuthor(String author);
 
     List<Book> findByTitle(String title);
-
-    List<Book> findByAuthorAndTitle(String author, String title);
 
     List<Book> findByPublishedYear(int publishedYear);
 
@@ -24,5 +22,4 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     List<Book> findByAuthorContaining(String keyword);
 
-    List<Book> findByRating(int rating);
 }
