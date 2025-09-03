@@ -1,5 +1,6 @@
 package com.me.bookreviewapi.book;
 
+import com.me.bookreviewapi.book.BookNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,5 +24,25 @@ public class BookService {
 	public List<Book> getBookByGenre(String genre){
 		return repository.findByGenre(genre);
 	}
-
+	public List<Book> getBookByPublishedYear(int publishedYear){
+		return repository.findByPublishedYear(publishedYear);
+	}
+	public void deleteById(Long id) throws BookNotFoundException {
+		if (!repository.existsById(id)) {
+			throw new BookNotFoundException("Book cannot be deleted. Not found with id: " + id);
+		}
+		repository.deleteById(id);
+	}
+	public Book createBook(Book book){
+		return repository.save(book);
+	}
+	public Book getBookByIsbn(String isbn) throws BookNotFoundException {
+		return repository.findByIsbn(isbn)
+							.orElseThrow(() -> new BookNotFoundException("Book not found with isbn: " + isbn));
+	}
+	public Book getBookById(Long id) throws BookNotFoundException {
+		return repository.findById(id)
+						 .orElseThrow(() -> new BookNotFoundException("Book not found with id: " + id));
+						
+	}
 }

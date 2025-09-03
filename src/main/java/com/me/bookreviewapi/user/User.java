@@ -1,62 +1,33 @@
 package com.me.bookreviewapi.user;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import java.util.List;
 
-import com.me.bookreviewapi.comment.Comment;
-import com.me.bookreviewapi.review.Review;
+import com.me.bookreviewapi.entity_class.BaseEntity;
 
 @Entity
 @Table(name = "users")
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    private String firstName;
-    private String lastName;
-    private String userName;
+public class User extends BaseEntity {
+
+    private String username;
     private String email;
+    private String password;
 
-    @OneToMany(mappedBy = "user")
-    List<Comment> comments;
-    @OneToMany(mappedBy = "user")
-    List<Review> reviews;
-
-    public User(String firstName, String lastName, String userName, String email) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.userName = userName;
+    public User(String username, String email, String password){
+        super();
+        this.username = username;
         this.email = email;
+        this.password = password;
     }
-    public User() {}
+    //no args constructor
+    public User(){}
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public String getUsername() {
+        return username;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {
@@ -67,4 +38,11 @@ public class User {
         this.email = email;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }
