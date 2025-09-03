@@ -29,8 +29,6 @@ public class Review extends BaseEntity {
         this.content = content;
         this.rating = rating;
     }
-
-    // no args constructor
    
     public String getContent() {
         return content;

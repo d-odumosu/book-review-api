@@ -16,7 +16,6 @@ public class Book extends BaseEntity {
         this.synopsis = synopsis;
 
     }
-    //no args constructor
     public Book(){}
 
     public String getTitle() {
