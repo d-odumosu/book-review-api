@@ -1,5 +1,6 @@
 package com.me.bookreviewapi.book;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,8 +38,11 @@ public class BookController {
     public Book createBook(@RequestBody Book book) {
         return bookService.createBook(book);
     }
-   //delete by id 
-   // find book by id
+    @DeleteMapping("/books/{id}")
+    public void deleteById(@PathVariable Long id) throws BookNotFoundException {
+        bookService.deleteById(id);
+    }
+
     
 }
     
