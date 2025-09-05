@@ -1,21 +1,27 @@
 package com.me.bookreviewapi.book;
 import com.me.bookreviewapi.entity_class.BaseEntity;
-import javax.persistence.Entity;
+
+import jakarta.validation.constraints.Size;
+import jakarta.persistence.Entity;
 
 @Entity
 public class Book extends BaseEntity {
 
     private String title;
     private String author;
-    private String synopsis;
 
-    public Book(String title, String author, String synopsis){
+    @Size(max = 1000)
+    private String synopsis;
+    private String genre;
+
+    public Book(String title, String author, String synopsis, String genre){
         super();
         this.title = title;
         this.author = author;
         this.synopsis = synopsis;
-
+        this.genre = genre;
     }
+
     public Book(){}
 
     public String getTitle() {
@@ -40,5 +46,12 @@ public class Book extends BaseEntity {
 
     public void setSynopsis(String synopsis) {
         this.synopsis = synopsis;
+    }
+    
+    public String getGenre() {
+        return genre;}
+
+    public void setGenre(String genre) {
+        this.genre = genre;
     }
 }

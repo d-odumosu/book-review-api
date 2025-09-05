@@ -3,6 +3,9 @@ package com.me.bookreviewapi.review;
 import com.me.bookreviewapi.entity_class.BaseEntity;
 
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Size;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import com.me.bookreviewapi.book.Book;
@@ -12,7 +15,10 @@ import com.me.bookreviewapi.user.User;
 @Entity
 public class Review extends BaseEntity {
 
+    @Size(max = 2000)
     private String content;
+    @Min(1)
+    @Max(5)
     private int rating;
 
     @ManyToOne(optional = false)
@@ -24,6 +30,7 @@ public class Review extends BaseEntity {
     private User user;
 
     public Review() {}
+
     public Review(String content, int rating) {
         super();
         this.content = content;

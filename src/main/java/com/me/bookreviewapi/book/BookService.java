@@ -28,7 +28,11 @@ public class BookService {
 		}
 		bookRepository.deleteById(id);
 	}
-	public Book createBook(Book book){
+	
+	public Book createBook(Book book) {
+		if (book.getTitle() == null || book.getTitle().trim().isEmpty()) {
+			throw new IllegalArgumentException("Book title cannot be empty");
+		}
 		return bookRepository.save(book);
 	}
 	
@@ -36,5 +40,8 @@ public class BookService {
 		return bookRepository.findById(id)
 						 .orElseThrow(() -> new BookNotFoundException("Book not found with id: " + id));
 						
+	}
+	public List<Book> getBookByGenre(String genre){
+		return bookRepository.findByGenre(genre);
 	}
 }

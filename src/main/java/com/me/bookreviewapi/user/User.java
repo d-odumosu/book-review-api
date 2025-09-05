@@ -2,15 +2,19 @@ package com.me.bookreviewapi.user;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Email;
 
 import com.me.bookreviewapi.entity_class.BaseEntity;
 
 @Entity
 @Table(name = "users")
 public class User extends BaseEntity {
-
+    @NotBlank(message = "Username is mandatory")
     private String username;
+    @Email(message = "Email is mandatory")
     private String email;
+    @NotBlank(message = "Password is mandatory")
     private String password;
 
     public User(String username, String email, String password){
@@ -19,7 +23,6 @@ public class User extends BaseEntity {
         this.email = email;
         this.password = password;
     }
-    //no args constructor
     public User(){}
 
     public String getUsername() {
