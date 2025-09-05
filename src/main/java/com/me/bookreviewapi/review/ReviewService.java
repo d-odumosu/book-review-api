@@ -2,10 +2,7 @@ package com.me.bookreviewapi.review;
 
 import com.me.bookreviewapi.book.BookRepository;
 import com.me.bookreviewapi.book.BookNotFoundException;
-
 import com.me.bookreviewapi.user.UserRepository;
-
-
 import java.util.List;
 import org.springframework.stereotype.Service;
 
@@ -25,8 +22,8 @@ public class ReviewService {
     public List<Review> getReviewsByUserId(Long user_id){
         return reviewRepository.findByUserId(user_id);
     }
-   
-    public Review createReview(Review review) {
+
+    public Review createReview(Review review) throws BookNotFoundException {
         if (bookRepository.existsById(review.getBook().getId())) {
             return reviewRepository.save(review);
         }

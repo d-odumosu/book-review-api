@@ -1,6 +1,9 @@
 package com.me.bookreviewapi.user;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.EnumType;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Email;
@@ -10,18 +13,22 @@ import com.me.bookreviewapi.entity_class.BaseEntity;
 @Entity
 @Table(name = "users")
 public class User extends BaseEntity {
+
     @NotBlank(message = "Username is mandatory")
+    @Column(unique = true, nullable = false)
     private String username;
+
+    @Column(unique = true, nullable = false)
     @Email(message = "Email is mandatory")
     private String email;
-    @NotBlank(message = "Password is mandatory")
-    private String password;
 
-    public User(String username, String email, String password){
+    @Enumerated(EnumType.STRING)
+    private Role role = Role.USER;
+
+    public User(String username, String email){
         super();
         this.username = username;
         this.email = email;
-        this.password = password;
     }
     public User(){}
 
@@ -40,12 +47,9 @@ public class User extends BaseEntity {
     public void setEmail(String email) {
         this.email = email;
     }
-
-    public String getPassword() {
-        return password;
+    
+    public Role getRole() {
+        return role;
     }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
+   
 }
