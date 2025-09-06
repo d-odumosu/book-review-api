@@ -4,34 +4,70 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.http.ResponseEntity;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.http.HttpStatus;
 
 import com.me.bookreviewapi.book.BookNotFoundException;
+import com.me.bookreviewapi.book.BookValidationException;
+import com.me.bookreviewapi.review.InvalidReviewContentException;
 import com.me.bookreviewapi.review.ReviewNotFoundException;
 import com.me.bookreviewapi.user.UserNotFoundException;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-@ExceptionHandler({
-        BookNotFoundException.class,
-        UserNotFoundException.class,
-        ReviewNotFoundException.class
-    })
-public ResponseEntity<Map<String, String>> handleNotFound(RuntimeException ex) {
-        Map<String, String> errorResponse = new HashMap<>();
-        errorResponse.put("error", "Resource Not Found");
-        errorResponse.put("message", ex.getMessage());
-        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleUserNotFound(UserNotFoundException ex,HttpServletRequest request ) {
+        ErrorResponse error = ErrorResponseUtil.buildErrorResponse(
+                ex,
+                HttpStatus.NOT_FOUND,
+                request.getRequestURI());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }
 
-    @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<Map<String, String>> handleRuntimeException(RuntimeException ex) {
-        Map<String, String> errorResponse = new HashMap<>();
-        errorResponse.put("error", "Internal Server Error");
-        errorResponse.put("message", ex.getMessage());
-        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+    @ExceptionHandler(BookNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleBookNotFound(BookNotFoundException ex, HttpServletRequest request) {
+        ErrorResponse error = ErrorResponseUtil.buildErrorResponse(
+                ex,
+                HttpStatus.NOT_FOUND,
+                request.getRequestURI());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+    }
+
+    @ExceptionHandler(ReviewNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleReviewNotFound(ReviewNotFoundException ex, HttpServletRequest request) {
+        ErrorResponse error = ErrorResponseUtil.buildErrorResponse(
+                ex,
+                HttpStatus.NOT_FOUND,
+                request.getRequestURI());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+    }
+    @ExceptionHandler(InvalidReviewContentException.class)
+    public ResponseEntity<ErrorResponse> handleInvalidReviewContent(InvalidReviewContentException ex, 
+            HttpServletRequest request){
+
+        ErrorResponse error = ErrorResponseUtil.buildErrorResponse(
+                ex,
+                HttpStatus.NOT_ACCEPTABLE,
+                request.getRequestURI());     
+        return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(error);
+    }
+    
+    @ExceptionHandler(BookValidationException.class)
+    public ResponseEntity<ErrorResponse> handleBookValidation(InvalidReviewContentException ex,
+            HttpServletRequest request) {
+
+        ErrorResponse error = ErrorResponseUtil.buildErrorResponse(
+                ex,
+                HttpStatus.BAD_REQUEST,
+                request.getRequestURI());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorResponse> handleAllExceptions(Exception ex, HttpServletRequest request) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(ErrorResponseUtil.buildErrorResponse(ex, HttpStatus.INTERNAL_SERVER_ERROR,
+                        request.getRequestURI()));
     }
 }

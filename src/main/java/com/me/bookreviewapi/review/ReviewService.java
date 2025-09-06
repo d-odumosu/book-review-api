@@ -2,7 +2,6 @@ package com.me.bookreviewapi.review;
 
 import com.me.bookreviewapi.book.BookRepository;
 import com.me.bookreviewapi.book.BookNotFoundException;
-import com.me.bookreviewapi.user.UserRepository;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +10,7 @@ public class ReviewService {
     private final ReviewRepository reviewRepository;
     private final BookRepository bookRepository;
 
-    public ReviewService(ReviewRepository repository, BookRepository bookRepository, UserRepository userRepository) {
+    public ReviewService(ReviewRepository repository, BookRepository bookRepository) {
         this.reviewRepository = repository;
         this.bookRepository = bookRepository;
     }
@@ -23,7 +22,7 @@ public class ReviewService {
         return reviewRepository.findByUserId(user_id);
     }
 
-    public Review createReview(Review review) throws BookNotFoundException {
+    public Review createReview(Review review) {
         if (bookRepository.existsById(review.getBook().getId())) {
             return reviewRepository.save(review);
         }
@@ -31,7 +30,7 @@ public class ReviewService {
         review.getBook().getId());
     }
 
-    public void deleteReviewById(Long id) throws ReviewNotFoundException {
+    public void deleteReviewById(Long id) {
         if (reviewRepository.existsById(id)) {
             reviewRepository.deleteById(id);
         } else {

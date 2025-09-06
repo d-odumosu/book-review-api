@@ -24,38 +24,29 @@ public ReviewController(ReviewService reviewService) {
         this.reviewService = reviewService;
 }
 
-@GetMapping("/book/{book_id}/reviews")
+@GetMapping("/books/{book_id}/reviews")
 public ResponseEntity<List<Review>> getReviewsByBook(@PathVariable Long book_id) {
     List<Review> reviews = reviewService.getReviewsByBookId(book_id);
-    if (reviews.isEmpty()) {
-        return ResponseEntity.noContent().build();
-    } else {
-        return ResponseEntity.ok(reviews);
-    }
+    return ResponseEntity.ok(reviews);
 }
 
-@GetMapping("/reviews/{user_id}/review")
+@GetMapping("/users/{user_id}/reviews")
 public ResponseEntity<List<Review>> getMethodName(@PathVariable Long user_id) {
     List<Review> reviews = reviewService.getReviewsByUserId(user_id);
-    if (reviews.isEmpty()) {
-        return ResponseEntity.noContent().build();
-    } else {
-        return ResponseEntity.ok(reviews);
-    }
+    return ResponseEntity.ok(reviews);
 }
-    @PostMapping("/review")
+
+    @PostMapping("/reviews")
     public ResponseEntity<Review> createReview(@RequestBody Review review) {
 
         if (review.getContent() == null || review.getContent().trim().isEmpty()) {
-            return ResponseEntity.badRequest().build();
-        } else {
-           
-            Review savedReview = reviewService.createReview(review);
-            return ResponseEntity.status(HttpStatus.CREATED).body(savedReview);
+            throw new InvalidReviewContentException("Review content cannot be empty");
         }
+        Review savedReview = reviewService.createReview(review);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedReview);
     }
     
-    @DeleteMapping("/review/{id}")
+    @DeleteMapping("/reviews/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Long id){
         reviewService.deleteReviewById(id);
         return ResponseEntity.noContent().build();

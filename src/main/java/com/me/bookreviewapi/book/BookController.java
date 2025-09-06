@@ -23,29 +23,14 @@ public class BookController {
 	private final BookService bookService;
 
 	public BookController(BookService bookService) {
-		this.bookService = bookService;
-	}
+        this.bookService = bookService;
+    }
     
-    @GetMapping(path = ("/books") )
+    @GetMapping("/books")
     public List<Book> getAllBooks() {
         return bookService.getAllBooks();
     }
-    @GetMapping(path = ("/books/genre/{genre}"))
-    public List<Book> getBookByGenre(@PathVariable String genre){
-        return bookService.getBookByGenre(genre);
-    }
 
-    @GetMapping("/books/title")
-    public ResponseEntity<List<Book>> getBookByTitle(@RequestParam String title) {
-        List<Book> books = bookService.getBookByTitle(title);
-        return ResponseEntity.ok(books); // returns [] if empty
-    }
-
-    @GetMapping(path = ("/books/author/{author}"))
-    public ResponseEntity<List<Book>> getBookByAuthor(@PathVariable String author){
-        List<Book> books = bookService.getBookByAuthor(author);
-        return ResponseEntity.ok(books);
-    }
     @PostMapping("/books")
     public ResponseEntity<Book> createBook(@RequestBody Book book) {
         Book createdBook = bookService.createBook(book);
@@ -53,16 +38,32 @@ public class BookController {
         .body(createdBook);
     }
 
-    
     @DeleteMapping("/books/{id}")
     public ResponseEntity<String> deleteById(@PathVariable Long id) throws BookNotFoundException {
         bookService.deleteById(id);
         return ResponseEntity.ok("Book deleted successfully");
     }
     
-    @GetMapping("/rating")
+    @GetMapping("/ratingS")
     public List<Book> getBooksByRatingGreaterThan(@RequestParam int rating) {
         return bookService.getBooksByRatingGreaterThan(rating);
+    }
+    
+    @GetMapping("/books/title")
+    public List<Book> getBookByTitle(@RequestParam String title) {
+        List<Book> books = bookService.getBookByTitle(title);
+        return books;
+    }
+    @GetMapping("/books/author")
+    public List<Book> getBookByAuthor(@RequestParam String author) {
+        List<Book> books = bookService.getBookByAuthor(author);
+        return books;
+
+    }
+    @GetMapping("/books/genre")
+    public List<Book> getBookByGenre(@RequestParam String genre){
+        List<Book> books = bookService.getBookByGenre(genre);
+        return books;
     }
 }
     

@@ -1,6 +1,7 @@
 package com.me.bookreviewapi.user;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
@@ -27,7 +28,7 @@ public class UserController {
         return userService.getUserById(id);
     }
     @GetMapping("/username/{username}")
-    public User getUserByUsername(@PathVariable String username) {
+    public User getUserByUsername(@RequestParam String username) {
         return userService.getUserByUsername(username);
     }
     

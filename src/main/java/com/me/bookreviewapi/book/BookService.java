@@ -22,7 +22,7 @@ public class BookService {
 		return bookRepository.findByTitleContainingIgnoreCase(title);
 	}
 	
-	public void deleteById(Long id) throws BookNotFoundException {
+	public void deleteById(Long id)  {
 		if (!bookRepository.existsById(id)) {
 			throw new BookNotFoundException("Book cannot be deleted. Not found with id: " + id);
 		}
@@ -31,12 +31,12 @@ public class BookService {
 	
 	public Book createBook(Book book) {
 		if (book.getTitle() == null || book.getTitle().trim().isEmpty()) {
-			throw new IllegalArgumentException("Book title cannot be empty");
+			throw new BookValidationException("Book title cannot be empty");
 		}
 		return bookRepository.save(book);
 	}
 	
-	public Book getBookById(Long id) throws BookNotFoundException {
+	public Book getBookById(Long id) {
 		return bookRepository.findById(id)
 						 .orElseThrow(() -> new BookNotFoundException("Book not found with id: " + id));
 						
@@ -47,8 +47,9 @@ public class BookService {
 	
 	public List<Book> getBooksByRatingGreaterThan(int rating) {
 		if (rating > 5 || rating < 1) {
-			throw new IllegalArgumentException("Rating must be between 1 and 5");
+			throw new BookValidationException("Rating must be between 1 and 5");
 		}
 		return bookRepository.findByRatingGreaterThan(rating);
 	}
+	
 }
