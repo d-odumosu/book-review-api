@@ -31,11 +31,12 @@ public class ReviewService {
         review.getBook().getId());
     }
 
-    public void deleteReviewById(Long id) throws ReviewNotFoundException{
+    public void deleteReviewById(Long id) throws ReviewNotFoundException {
         if (reviewRepository.existsById(id)) {
             reviewRepository.deleteById(id);
+        } else {
+            throw new ReviewNotFoundException("Review not found with id: " + id); 
         }
-        throw new ReviewNotFoundException("Book not found with id: " + id);
     }
 
 }

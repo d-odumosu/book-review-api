@@ -16,10 +16,10 @@ public class BookService {
 		return bookRepository.findAll();
 	}
 	public List<Book> getBookByAuthor(String author){
-		return bookRepository.findByAuthor(author);
+		return bookRepository.findByAuthorIgnoreCase(author);
 	}
 	public List<Book> getBookByTitle(String title){
-		return bookRepository.findByTitle(title);
+		return bookRepository.findByTitleContainingIgnoreCase(title);
 	}
 	
 	public void deleteById(Long id) throws BookNotFoundException {
@@ -42,6 +42,13 @@ public class BookService {
 						
 	}
 	public List<Book> getBookByGenre(String genre){
-		return bookRepository.findByGenre(genre);
+		return bookRepository.findByGenreIgnoreCase(genre);
+	}
+	
+	public List<Book> getBooksByRatingGreaterThan(int rating) {
+		if (rating > 5 || rating < 1) {
+			throw new IllegalArgumentException("Rating must be between 1 and 5");
+		}
+		return bookRepository.findByRatingGreaterThan(rating);
 	}
 }

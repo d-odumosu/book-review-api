@@ -24,7 +24,7 @@ public ReviewController(ReviewService reviewService) {
         this.reviewService = reviewService;
 }
 
-@GetMapping("/book/{book_id}/reviews}")
+@GetMapping("/book/{book_id}/reviews")
 public ResponseEntity<List<Review>> getReviewsByBook(@PathVariable Long book_id) {
     List<Review> reviews = reviewService.getReviewsByBookId(book_id);
     if (reviews.isEmpty()) {
