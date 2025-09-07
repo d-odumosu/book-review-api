@@ -1,4 +1,4 @@
-package com.me.bookreviewapi.entity_class;
+package com.me.bookreviewapi.model_interface;
 
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.Id;

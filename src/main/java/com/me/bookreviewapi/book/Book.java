@@ -1,9 +1,10 @@
 package com.me.bookreviewapi.book;
-import com.me.bookreviewapi.entity_class.BaseEntity;
-
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Size;
+
+import com.me.bookreviewapi.model_interface.BaseEntity;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 

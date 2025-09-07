@@ -1,5 +1,7 @@
 package com.me.bookreviewapi.user;
 
+import com.me.bookreviewapi.model_interface.BaseEntity;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Enumerated;
@@ -7,8 +9,6 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Email;
-
-import com.me.bookreviewapi.entity_class.BaseEntity;
 
 @Entity
 @Table(name = "users")

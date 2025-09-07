@@ -45,11 +45,8 @@ public class BookService {
 		return bookRepository.findByGenreIgnoreCase(genre);
 	}
 	
-	public List<Book> getBooksByRatingGreaterThan(int rating) {
-		if (rating > 5 || rating < 1) {
-			throw new BookValidationException("Rating must be between 1 and 5");
-		}
-		return bookRepository.findByRatingGreaterThan(rating);
+	public List<Book> getBooksByRating(int rating){
+		return bookRepository.findBooksByRating(rating);
 	}
 	
 }

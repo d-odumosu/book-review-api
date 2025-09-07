@@ -44,9 +44,9 @@ public class BookController {
         return ResponseEntity.ok("Book deleted successfully");
     }
     
-    @GetMapping("/ratingS")
-    public List<Book> getBooksByRatingGreaterThan(@RequestParam int rating) {
-        return bookService.getBooksByRatingGreaterThan(rating);
+    @GetMapping("/rating")
+    public List<Book> getBooksByRating(@RequestParam int rating) {
+        return bookService.getBooksByRating(rating);
     }
     
     @GetMapping("/books/title")

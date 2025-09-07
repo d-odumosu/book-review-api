@@ -66,7 +66,7 @@ This provides an interactive interface where you can test endpoints (GET, POST, 
 🧪 Testing the API
 Once the app is running:
 
-Use Postman, Insomnia, or curl to test endpoints.
+Use Postman to test endpoints.
 
 Example request:
 

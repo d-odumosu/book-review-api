@@ -19,7 +19,9 @@ INSERT INTO book (id, title, author, rating, synopsis, genre, created_at) VALUES
 (1015, 'Graceland', 'Chris Abani', 3, 'Young Elvis impersonator in Lagos slum.', 'Fiction', NOW()),
 (1016, 'Behold the Dreamers', 'Imbolo Mbue', 5, 'Cameroonian family in New York during financial crisis.', 'Fiction', NOW()),
 (1017, 'We Need New Names', 'NoViolet Bulawayo', 4, 'A girl’s journey from Zimbabwe to America.', 'Fiction', NOW()),
-(1018, 'Purple Hibiscus', 'Chimamanda Ngozi Adichie', 4, 'Coming-of-age story in postcolonial Nigeria.', 'Fiction', NOW());
+(1018, 'Purple Hibiscus', 'Chimamanda Ngozi Adichie', 4, 'Coming-of-age story in postcolonial Nigeria.', 'Fiction', NOW()),
+(1019, 'Half of a Yellow Sun', 'Chimamanda Ngozi Adichie', 5, 'Story of love and war during the Biafran conflict.', 'Historical Fiction', NOW()),
+(1020, 'Dust', 'Yvonne Adhiambo Owuor', 4, 'A Kenyan family saga shaped by politics and memory.', 'Literary Fiction', NOW());
 
 -- USERS
 INSERT INTO users (id, username, email, role, created_at) VALUES
@@ -60,4 +62,15 @@ INSERT INTO review (id, content, rating, book_id, user_id, created_at) VALUES
 (12, 'Simple, elegant, and insightful.', 5, 1011, 12, NOW()),
 (13, 'Didn’t connect with me, but I see its value.', 3, 1012, 13, NOW()),
 (14, 'A bold story told with creativity.', 4, 1013, 14, NOW()),
-(15, 'Philosophical, though sometimes hard to follow.', 3, 1014, 15, NOW());
+(15, 'Philosophical, though sometimes hard to follow.', 3, 1014, 15, NOW()),
+(16, 'Achebe never disappoints, a timeless story.', 5, 1000, 16, NOW()), 
+(17, 'Americanah was eye-opening, loved it.', 4, 1001, 17, NOW()),       
+(18, 'Born a Crime made me laugh and cry.', 5, 1002, 18, NOW()),        
+(19, 'One of the best books I’ve read this year.', 5, 1000, 19, NOW()), 
+(20, 'Purple Hibiscus is beautifully written.', 5, 1018, 20, NOW()),   
+(21, 'Achebe’s writing is powerful as always.', 5, 1007, 1, NOW()), 
+(22, 'I liked the themes but pacing was slow.', 3, 1009, 1, NOW()), 
+
+(23, 'Americanah changed my perspective on race.', 4, 1010, 2, NOW()), 
+
+(24, 'Born a Crime is both funny and heartbreaking.', 5, 1011, 3, NOW()); 
