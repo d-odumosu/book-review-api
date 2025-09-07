@@ -67,8 +67,23 @@ public class BookRepositoryTest {
         assertEquals(testBook3, result.get(0));
         verify(bookRepository).findBooksByRating(5);
         
-        
-        
+    }
+    @Test
+    void testFindBooksByRating_ReturnsEmptyList_whenNoMatches(){
+        //arrange
+        when(bookRepository.findBooksByRating(2)).thenReturn(List.of());
+
+        //act
+        List<Book> result = bookRepository.findBooksByRating(2);
+
+        //assert
+        assertNotNull(result);
+        assertTrue(result.isEmpty());
+        assertEquals(0, result.size());
+        verify(bookRepository).findBooksByRating(2);
+
+
+
     }
 
 }
