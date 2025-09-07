@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,26 +18,30 @@ import org.springframework.http.ResponseEntity;
 @RequestMapping("/api")
 public class ReviewController {
 
-private final ReviewService reviewService;
+    private final ReviewService reviewService;
 
 
-public ReviewController(ReviewService reviewService) {
+    public ReviewController(ReviewService reviewService) {
         this.reviewService = reviewService;
 }
 
 @GetMapping("/books/{book_id}/reviews")
-public ResponseEntity<List<Review>> getReviewsByBook(@PathVariable Long book_id) {
+    public ResponseEntity<List<Review>> getReviewsByBook(@PathVariable Long book_id) {
     List<Review> reviews = reviewService.getReviewsByBookId(book_id);
     return ResponseEntity.ok(reviews);
 }
 
 @GetMapping("/users/{user_id}/reviews")
-public ResponseEntity<List<Review>> getMethodName(@PathVariable Long user_id) {
+    public ResponseEntity<List<Review>> getMethodName(@PathVariable Long user_id) {
     List<Review> reviews = reviewService.getReviewsByUserId(user_id);
     return ResponseEntity.ok(reviews);
 }
+@GetMapping("/reviews/{id}")
+    public Review getReviewById(@PathVariable Long id){
+    return reviewService.getReviewById(id);
+}
 
-    @PostMapping("/reviews")
+@PostMapping("/reviews")
     public ResponseEntity<Review> createReview(@RequestBody Review review) {
 
         if (review.getContent() == null || review.getContent().trim().isEmpty()) {
@@ -52,4 +57,14 @@ public ResponseEntity<List<Review>> getMethodName(@PathVariable Long user_id) {
         return ResponseEntity.noContent().build();
     }
     
+    @PutMapping("/reviews/{id}")
+    public Review updateReview(@PathVariable Long id, @RequestBody Review review) {
+        return reviewService.updateReview(id, review);
+
+    }
+    @GetMapping("/reviews")
+    public List<Review> getAllReviews() {
+        return reviewService.getAllReviews();
+
+    }
 }

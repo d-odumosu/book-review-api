@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Size;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import jakarta.persistence.JoinColumn;
 import com.me.bookreviewapi.book.Book;
 import com.me.bookreviewapi.model_interface.BaseEntity;
@@ -12,6 +13,7 @@ import com.me.bookreviewapi.user.User;
 
 
 @Entity
+@Table(name = "reviews")
 public class Review extends BaseEntity {
 
     @Size(max = 2000)

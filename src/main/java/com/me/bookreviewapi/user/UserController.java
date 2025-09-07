@@ -1,5 +1,6 @@
 package com.me.bookreviewapi.user;
 
+import java.util.List;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 
 @RestController
@@ -23,6 +26,12 @@ public class UserController {
     public UserController(UserService userService){
         this.userService = userService;
     }
+    
+    @GetMapping
+    public List<User> getAllUsers() {
+        return userService.getAllUsers();
+    }
+    
     @GetMapping("{id}")
     public User getUserById(@PathVariable Long id) {
         return userService.getUserById(id);
@@ -30,6 +39,12 @@ public class UserController {
     @GetMapping("/username/{username}")
     public User getUserByUsername(@RequestParam String username) {
         return userService.getUserByUsername(username);
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<User> updateUser(@PathVariable Long id, @Valid @RequestBody User user) {
+        User updatedUser = userService.updateUser(id, user);
+        return ResponseEntity.ok(updatedUser);
+       
     }
     
     @PostMapping

@@ -14,8 +14,11 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     @Query("SELECT b FROM Book b WHERE b.rating = :rating")
     List<Book> findBooksByRating(@Param("rating") int rating);
 
-
     List<Book> findByTitleContainingIgnoreCase(String keyword);
 
     List<Book> findByGenreIgnoreCase(String genre);
+    
+    List<Book> findByTitleAndAuthorIgnoreCase(String title, String author);
+
+    List<Book> findTop5ByOrderByRatingDesc();
 }

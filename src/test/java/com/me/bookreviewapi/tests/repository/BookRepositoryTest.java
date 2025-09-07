@@ -21,26 +21,19 @@ public class BookRepositoryTest {
     @Mock
     private BookRepository bookRepository;
 
-    private Book testBook1;
     private Book testBook2;
     private Book testBook3;
 
     @BeforeEach
     void setUp() {
-        testBook1 = new Book(
-                "Bloodbath at Lobster Close",
-                "Dickson Ighavini",
-                "A gritty, fast-paced crime thriller set in a Nigerian neighborhood grappling with violence and secrets.",
-                "Crime Fiction",
-                3
-        );
+       
 
         testBook2 = new Book(
                 "Symphony of Destruction",
                 "Sunday D. Adebomi",
                 "A compelling exploration of chaos, ambition, and redemption in modern Nigerian society.",
                 "Contemporary Fiction",
-                4
+                5
         );
 
         testBook3 = new Book(
@@ -55,7 +48,7 @@ public class BookRepositoryTest {
     @Test
     void testFindBooksByRating_ReturnsMatchingBooks(){
         //arrange
-        List <Book> expectedBooks = Arrays.asList(testBook1, testBook2, testBook3);
+        List <Book> expectedBooks = Arrays.asList( testBook2, testBook3);
         when(bookRepository.findBooksByRating(5)).thenReturn(expectedBooks);
 
         //act
@@ -63,10 +56,11 @@ public class BookRepositoryTest {
 
         //assert
         assertNotNull(result);
-        assertEquals(5, result.size());
-        assertEquals(testBook3, result.get(0));
+        assertEquals(2, result.size());
+        assertTrue(result.contains(testBook2));
+        assertTrue(result.contains(testBook3));
         verify(bookRepository).findBooksByRating(5);
-        
+
     }
     @Test
     void testFindBooksByRating_ReturnsEmptyList_whenNoMatches(){
@@ -79,7 +73,6 @@ public class BookRepositoryTest {
         //assert
         assertNotNull(result);
         assertTrue(result.isEmpty());
-        assertEquals(0, result.size());
         verify(bookRepository).findBooksByRating(2);
 
 

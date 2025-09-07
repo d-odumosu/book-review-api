@@ -2,24 +2,29 @@ package com.me.bookreviewapi.book;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.NotBlank;
 
 import com.me.bookreviewapi.model_interface.BaseEntity;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "books")
 public class Book extends BaseEntity {
-    @Column(nullable = false)
+
+    @NotBlank(message = "Title cannot be blank")
     private String title;
-    @Column(nullable = false)
+    @NotBlank(message = "Author cannot be blank")
     private String author;
-    @Min(1) 
-    @Max(5)
+    @Min(value = 1, message = "Rating must be at least 1")
+    @Max(value = 5, message = "Rating must be at most 5")
     private int rating;
 
-    @Size(max = 1000)
+    @Size(max = 1000, message = "Synopsis must be at most 1000 characters")
     private String synopsis;
+
+    @NotBlank(message = "Genre cannot be blank")
     private String genre;
 
     public Book(String title, String author, String synopsis, String genre, int rating){

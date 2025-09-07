@@ -1,6 +1,6 @@
 
 -- BOOKS
-INSERT INTO book (id, title, author, rating, synopsis, genre, created_at) VALUES
+INSERT INTO books (id, title, author, rating, synopsis, genre, created_at) VALUES
 (1000, 'Things Fall Apart', 'Chinua Achebe', 5, 'Classic novel about Igbo society and colonialism.', 'Classic', NOW()),
 (1001, 'Americanah', 'Chimamanda Ngozi Adichie', 3, 'A love story exploring race and migration.', 'Romance', NOW()),
 (1002, 'Born a Crime', 'Trevor Noah', 5, 'Memoir of growing up in South Africa under apartheid.', 'Biography', NOW()),
@@ -47,7 +47,7 @@ INSERT INTO users (id, username, email, role, created_at) VALUES
 (20, 'zara', 'zara@example.com', 'USER', NOW());
 
 -- REVIEWS
-INSERT INTO review (id, content, rating, book_id, user_id, created_at) VALUES
+INSERT INTO reviews (id, content, rating, book_id, user_id, created_at) VALUES
 (1, 'Absolutely loved this book, very moving.', 5, 1000, 1, NOW()),
 (2, 'Well written but a bit slow in parts.', 3, 1001, 2, NOW()),
 (3, 'A masterpiece. Every student should read it.', 5, 1002, 3, NOW()),

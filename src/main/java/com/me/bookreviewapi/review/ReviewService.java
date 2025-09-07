@@ -38,6 +38,19 @@ public class ReviewService {
             throw new ReviewNotFoundException("Review not found with id: " + id); 
         }
     }
+    public Review getReviewById(Long id) {
+        return reviewRepository.findById(id)
+            .orElseThrow(() -> new ReviewNotFoundException("Review not found with id: " + id));
+    }
+    public Review updateReview(Long id, Review review) {
+        Review existingReview = getReviewById(id);
+        existingReview.setContent(review.getContent());
+        existingReview.setRating(review.getRating());
+        return reviewRepository.save(existingReview);
+    }
+    public List<Review> getAllReviews() {
+        return reviewRepository.findAll();
+    }
     
 
 }

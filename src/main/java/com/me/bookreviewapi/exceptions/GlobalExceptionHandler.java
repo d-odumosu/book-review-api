@@ -1,9 +1,10 @@
 package com.me.bookreviewapi.exceptions;
 
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.http.ResponseEntity;
-
+import org.springframework.validation.FieldError;
 import org.springframework.http.HttpStatus;
 
 import com.me.bookreviewapi.book.BookNotFoundException;
@@ -13,6 +14,8 @@ import com.me.bookreviewapi.review.ReviewNotFoundException;
 import com.me.bookreviewapi.user.UserNotFoundException;
 
 import jakarta.servlet.http.HttpServletRequest;
+import java.util.Map;
+import java.util.HashMap;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -70,4 +73,20 @@ public class GlobalExceptionHandler {
                 .body(ErrorResponseUtil.buildErrorResponse(ex, HttpStatus.INTERNAL_SERVER_ERROR,
                         request.getRequestURI()));
     }
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public Map<String, String> handleValidationExceptions( MethodArgumentNotValidException ex) {
+            Map<String, String> errors = new HashMap<>();
+             ex.getBindingResult().getAllErrors().forEach((error) -> {
+        String fieldName = ((FieldError) error).getField();
+        String errorMessage = error.getDefaultMessage();
+        errors.put(fieldName, errorMessage);
+    });
+
+    return errors;
 }
+
+    }     
+     
+
+
+
