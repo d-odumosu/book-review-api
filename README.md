@@ -77,17 +77,53 @@ Some users and books are deliberately left without reviews to test empty respons
 
 📂 Project Structure
 
-The project is organized by feature rather than by strict layers. Each feature (Book, User, Review) contains its own controller, service, repository, and entity classes. This keeps related code together and makes the project easier to extend. The structure is as follows:
+The project is organized by feature, each feature (Book, User, Review) contains its own controller, service and repository. The structure is as follows:
 
-src/main/java/com/me/bookreviewapi
- ├── book/         # Book entity, repository, service, controller
- ├── review/       # Review entity, repository, service, controller
- ├── user/         # User entity, repository, service, controller
- 
+com.me.bookreviewapi
+ ├── book/
+ │   ├── Book.java
+ │   ├── BookRepository.java
+ │   ├── BookService.java
+ │   ├── BookController.java
+ │   ├── BookNotFoundException.java
+ │   └── BookValidationException.java
+ │
+ ├── exception/
+ │   └── GlobalExceptionHandler.java   
+ │
+ ├── model_interface/
+ │   └── BaseEntity.java
+ │
+ ├── review/
+ │   ├── Review.java
+ │   ├── ReviewRepository.java
+ │   ├── ReviewService.java
+ │   ├── ReviewController.java
+ │   ├── ReviewNotFoundException.java
+ │   └── InvalidReviewContentException.java
+ │
+ ├── user/
+ │   ├── User.java
+ │   ├── Role.java
+ │   ├── UserRepository.java
+ │   ├── UserService.java
+ │   ├── UserController.java
+ │   └── UserNotFoundException.java
+ │
+ ├── resources/
+ │   ├── application.properties  # Database configuration
+ │   └── data.sql                # Sample data inserted at startup
+ │
+ ├── test/
+ │   └── repository/
+ │       ├── BookRepositoryTest.java
+ │       ├── ReviewRepositoryTest.java
+ │       └── UserRepositoryTest.java
+ │
+ └── BookReviewApiApplication.java
 
-src/main/resources
- ├── application.properties   # Database configuration
- ├── data.sql                 # Sample data inserted at startup
+
+             
 
  
 

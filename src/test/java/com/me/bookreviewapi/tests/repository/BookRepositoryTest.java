@@ -1,4 +1,4 @@
-package com.me.bookreviewapi.bookTests;
+package com.me.bookreviewapi.tests.repository;
 
 import com.me.bookreviewapi.book.Book;
 import com.me.bookreviewapi.book.BookRepository;
