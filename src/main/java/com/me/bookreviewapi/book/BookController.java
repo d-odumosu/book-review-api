@@ -32,8 +32,8 @@ public class BookController {
     }
     
     @GetMapping("/books")
-    public List<Book> getAllBooks() {
-        return bookService.getAllBooks();
+    public ResponseEntity<List<Book>> getAllBooks() {
+        return ResponseEntity.ok(bookService.getAllBooks());
     }
     @GetMapping("/books/{id}")
     public Book getBookById(@PathVariable Long id) {
