@@ -58,7 +58,7 @@ public class GlobalExceptionHandler {
     }
     
     @ExceptionHandler(BookValidationException.class)
-    public ResponseEntity<ErrorResponse> handleBookValidation(InvalidReviewContentException ex,
+    public ResponseEntity<ErrorResponse> handleBookValidation(BookValidationException ex,
             HttpServletRequest request) {
 
         ErrorResponse error = ErrorResponseUtil.buildErrorResponse(
